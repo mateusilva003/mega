@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gerador Premium - 100 Sequências (6 números de 1-60)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --danger: #f72585;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+        
+        .subtitle {
+            color: var(--gray);
+            font-size: 1rem;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 0.5rem;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .card-title i {
+            font-size: 1.5rem;
+        }
+        
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            -webkit-appearance: none;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            gap: 0.5rem;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e9ecef;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #d11465;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #3ab4d9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.8rem;
+            height: 2.8rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0.2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .number.highlight {
+            background-color: var(--danger);
+            transform: scale(1.1);
+        }
+        
+        .result-container {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .result-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+        
+        .analysis-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .analysis-card-title {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .progress-container {
+            margin-top: 0.5rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
+        
+        .sequence-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.2rem;
+        }
+        
+        .sequence-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .sequence-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+        
+        .sequence-item-delete {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            padding: 0.2rem;
+        }
+        
+        .sequence-item-delete:hover {
+            color: var(--danger);
+        }
+        
+        .legend {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .legend-color {
+            width: 0.9rem;
+            height: 0.9rem;
+            border-radius: 50%;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 0.8rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+        
+        /* Media Queries para telas maiores */
+        @media (min-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                max-width: 1200px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .input-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .btn-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .btn {
+                width: auto;
+                padding: 0.8rem 1.2rem;
+                margin-bottom: 0;
+            }
+            
+            .analysis-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .sequence-list {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        
+        /* Scroll personalizado */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 6px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+        
+        /* Melhorias para mobile */
+        input, button, textarea, select {
+            font-size: 16px !important; /* Evita zoom em iOS */
+        }
+        
+        /* Alertas responsivos */
+        .alert {
+            max-width: calc(100% - 40px);
+            right: 10px !important;
+            left: 10px !important;
+            width: auto !important;
+            padding: 0.8rem 1rem !important;
+            font-size: 0.9rem !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-chart-line"></i> Gerador Premium de Sequências</h1>
+            <p class="subtitle">Analise até 100 sequências de 6 números (1-60) e receba sugestões inteligentes</p>
+        </header>
+        
+        <div class="card fade-in">
+            <h2 class="card-title"><i class="fas fa-list-ol"></i> Adicionar Sequências</h2>
+            <p>Insira até 100 sequências anteriores (6 números cada, separados por vírgula, de 1 a 60)</p>
+            
+            <div id="sequenceInputs" class="input-grid">
+                <div class="input-group">
+                    <label for="sequence1" class="input-label">Sequência 1</label>
+                    <input type="text" id="sequence1" class="input-field" placeholder="Ex: 3, 15, 22, 37, 45, 52">
+                </div>
+            </div>
+            
+            <div class="btn-group">
+                <button onclick="addMultipleInputs(5)" class="btn btn-secondary">
+                    <i class="fas fa-plus-circle"></i> Adicionar 5 Campos
+                </button>
+                <button onclick="addMultipleInputs(10)" class="btn btn-secondary">
+                    <i class="fas fa-plus-square"></i> Adicionar 10 Campos
+                </button>
+                <button onclick="resetInputs()" class="btn btn-secondary">
+                    <i class="fas fa-broom"></i> Limpar Campos
+                </button>
+                <button onclick="addAllSequences()" class="btn btn-success">
+                    <i class="fas fa-save"></i> Salvar Todas as Sequências
+                </button>
+            </div>
+            
+            <div id="sequenceList" class="sequence-list"></div>
+        </div>
+        
+        <div class="card fade-in" style="animation-delay: 0.2s;">
+            <h2 class="card-title"><i class="fas fa-chart-pie"></i> Análise e Predição</h2>
+            <p>Com base nas sequências inseridas, o sistema identificará padrões e sugerirá uma nova sequência</p>
+            
+            <div class="btn-group">
+                <button id="analyzeBtn" onclick="analyzePatterns()" class="btn btn-primary">
+                    <i class="fas fa-chart-bar"></i> Analisar Padrões
+                </button>
+                <button id="generateBtn" onclick="generateSuggestedSequence()" disabled class="btn btn-success">
+                    <i class="fas fa-lightbulb"></i> Sugerir Próxima Sequência
+                </button>
+                <button onclick="clearAll()" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i> Reiniciar Tudo
+                </button>
+                <button onclick="exportData()" class="btn btn-secondary">
+                    <i class="fas fa-file-export"></i> Exportar Dados
+                </button>
+                <button onclick="document.getElementById('fileInput').click()" class="btn btn-secondary">
+                    <i class="fas fa-file-import"></i> Importar Dados
+                </button>
+                <input type="file" id="fileInput" accept=".json" style="display:none;" onchange="importData(event)">
+            </div>
+        </div>
+        
+        <div id="result" class="result-container fade-in" style="animation-delay: 0.4s; display: none;">
+            <h3 class="result-title"><i class="fas fa-poll"></i> Resultados da Análise</h3>
+            <div id="analysisResult"></div>
+            
+            <h3 class="result-title" style="margin-top: 1.5rem;"><i class="fas fa-magic"></i> Sugestão de Próxima Sequência</h3>
+            <div id="suggestedSequence"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis globais
+        let sequences = [];
+        let analysisData = {};
+        const MAX_SEQUENCES = 100;
+        const MIN_NUMBER = 1;
+        const MAX_NUMBER = 60;
+        const NUMBERS_PER_SEQUENCE = 6;
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFromLocalStorage();
+            addMultipleInputs(5); // Adiciona 5 campos inicialmente
+        });
+        
+        // Funções de controle de inputs
+        function addMultipleInputs(count) {
+            const currentInputs = document.querySelectorAll('.input-group').length;
+            const remaining = MAX_SEQUENCES - currentInputs;
+            const toAdd = Math.min(count, remaining);
+            
+            const container = document.getElementById('sequenceInputs');
+            
+            for (let i = 0; i < toAdd; i++) {
+                const index = currentInputs + i + 1;
+                const inputGroup = document.createElement('div');
+                inputGroup.className = 'input-group';
+                inputGroup.innerHTML = `
+                    <label for="sequence${index}" class="input-label">Sequência ${index}</label>
+                    <input type="text" id="sequence${index}" class="input-field" placeholder="Ex: 7, 12, 24, 36, 49, 52">
+                `;
+                container.appendChild(inputGroup);
+            }
+            
+            if (toAdd < count) {
+                showAlert(`Limite de ${MAX_SEQUENCES} sequências atingido`, 'info');
+            }
+        }
+        
+        function resetInputs() {
+            const container = document.getElementById('sequenceInputs');
+            container.innerHTML = '';
+            addMultipleInputs(5);
+        }
+        
+        function addAllSequences() {
+            const inputFields = document.querySelectorAll('.input-field');
+            const newSequences = [];
+            
+            inputFields.forEach(input => {
+                if (input.value.trim() !== '') {
+                    const numbers = parseSequence(input.value);
+                    if (numbers.length === NUMBERS_PER_SEQUENCE) {
+                        newSequences.push(numbers);
+                        input.value = '';
+                    } else {
+                        showAlert(`A sequência "${input.value}" não contém ${NUMBERS_PER_SEQUENCE} números válidos`, 'warning');
+                        return;
+                    }
+                }
+            });
+            
+            if (newSequences.length > 0) {
+                sequences = [...sequences, ...newSequences].slice(-MAX_SEQUENCES);
+                updateSequenceList();
+                saveToLocalStorage();
+                showAlert(`${newSequences.length} sequências adicionadas com sucesso!`, 'success');
+            }
+        }
+        
+        // Funções de análise
+        function analyzePatterns() {
+            if (sequences.length < 2) {
+                showAlert('Adicione pelo menos 2 sequências para análise', 'warning');
+                return;
+            }
+            
+            // Inicializa objeto de análise
+            analysisData = {
+                totalSequences: sequences.length,
+                frequentNumbers: {},
+                numberFrequency: {},
+                rangeDistribution: {
+                    '1-12': 0,
+                    '13-24': 0,
+                    '25-36': 0,
+                    '37-49': 0,
+                    '50-60': 0
+                },
+                evenOddRatio: { even: 0, odd: 0 },
+                averageDistance: 0,
+                commonPairs: {},
+                lastDigitAnalysis: Array(10).fill(0),
+                sumAnalysis: {
+                    min: Infinity,
+                    max: -Infinity,
+                    average: 0,
+                    sums: []
+                }
+            };
+            
+            // Variáveis para cálculos
+            let totalNumbers = 0;
+            let totalDistance = 0;
+            let totalSum = 0;
+            
+            // Processa cada sequência
+            sequences.forEach(sequence => {
+                // Calcula soma da sequência
+                const sum = sequence.reduce((a, b) => a + b, 0);
+                analysisData.sumAnalysis.sums.push(sum);
+                totalSum += sum;
+                analysisData.sumAnalysis.min = Math.min(analysisData.sumAnalysis.min, sum);
+                analysisData.sumAnalysis.max = Math.max(analysisData.sumAnalysis.max, sum);
+                
+                // Processa cada número na sequência
+                sequence.forEach(num => {
+                    // Frequência de números
+                    analysisData.numberFrequency[num] = (analysisData.numberFrequency[num] || 0) + 1;
+                    
+                    // Distribuição por faixa
+                    if (num <= 12) analysisData.rangeDistribution['1-12']++;
+                    else if (num <= 24) analysisData.rangeDistribution['13-24']++;
+                    else if (num <= 36) analysisData.rangeDistribution['25-36']++;
+                    else if (num <= 49) analysisData.rangeDistribution['37-49']++;
+                    else analysisData.rangeDistribution['50-60']++;
+                    
+                    // Par/Ímpar
+                    if (num % 2 === 0) analysisData.evenOddRatio.even++;
+                    else analysisData.evenOddRatio.odd++;
+                    
+                    // Análise do último dígito
+                    const lastDigit = num % 10;
+                    analysisData.lastDigitAnalysis[lastDigit]++;
+                });
+                
+                // Distâncias entre números (sequência ordenada)
+                const sorted = [...sequence].sort((a, b) => a - b);
+                for (let i = 1; i < sorted.length; i++) {
+                    totalDistance += sorted[i] - sorted[i - 1];
+                }
+                totalNumbers += sequence.length;
+                
+                // Pares comuns
+                for (let i = 0; i < sequence.length - 1; i++) {
+                    for (let j = i + 1; j < sequence.length; j++) {
+                        const pair = [sequence[i], sequence[j]].sort((a, b) => a - b).join('-');
+                        analysisData.commonPairs[pair] = (analysisData.commonPairs[pair] || 0) + 1;
+                    }
+                }
+            });
+            
+            // Finaliza cálculos
+            analysisData.averageDistance = totalDistance / (totalNumbers - sequences.length);
+            analysisData.sumAnalysis.average = totalSum / sequences.length;
+            
+            // Identifica números mais frequentes (top 20)
+            const sortedNumbers = Object.entries(analysisData.numberFrequency)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 20);
+            
+            analysisData.frequentNumbers = Object.fromEntries(sortedNumbers);
+            
+            // Exibe resultados
+            displayAnalysis();
+            document.getElementById('generateBtn').disabled = false;
+            document.getElementById('result').style.display = 'block';
+            saveToLocalStorage();
+            
+            showAlert(`Análise concluída com ${sequences.length} sequências processadas`, 'success');
+        }
+        
+        function generateSuggestedSequence() {
+            if (!analysisData || Object.keys(analysisData).length === 0) {
+                showAlert("Primeiro analise os padrões das sequências", 'warning');
+                return;
+            }
+            
+            const suggestedSequence = generateSequenceFromAnalysis();
+            displaySuggestedSequence(suggestedSequence);
+        }
+        
+        function generateSequenceFromAnalysis() {
+            const candidates = [];
+            const weights = [];
+            
+            // 1. Adiciona números frequentes (com peso proporcional à frequência)
+            Object.entries(analysisData.frequentNumbers).forEach(([num, freq]) => {
+                candidates.push(parseInt(num));
+                weights.push(freq * 3);
+            });
+            
+            // 2. Adiciona números das faixas menos representadas
+            const ranges = [
+                {min: 1, max: 12, count: analysisData.rangeDistribution['1-12']},
+                {min: 13, max: 24, count: analysisData.rangeDistribution['13-24']},
+                {min: 25, max: 36, count: analysisData.rangeDistribution['25-36']},
+                {min: 37, max: 49, count: analysisData.rangeDistribution['37-49']},
+                {min: 50, max: 60, count: analysisData.rangeDistribution['50-60']}
+            ].sort((a, b) => a.count - b.count);
+            
+            // Adiciona 3 números de cada uma das 2 faixas menos representadas
+            ranges.slice(0, 2).forEach(range => {
+                for (let i = 0; i < 3; i++) {
+                    const num = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+                    if (!candidates.includes(num)) {
+                        candidates.push(num);
+                        weights.push(1.5);
+                    }
+                }
+            });
+            
+            // 3. Adiciona alguns números com últimos dígitos pouco frequentes
+            const leastFrequentDigits = analysisData.lastDigitAnalysis
+                .map((count, digit) => ({digit, count}))
+                .sort((a, b) => a.count - b.count)
+                .slice(0, 3);
+            
+            leastFrequentDigits.forEach(({digit}) => {
+                for (let i = 1; i <= 6; i++) {
+                    const num = i * 10 + digit;
+                    if (num <= MAX_NUMBER && !candidates.includes(num)) {
+                        candidates.push(num);
+                        weights.push(1.2);
+                    }
+                }
+            });
+            
+            // 4. Seleção ponderada considerando todos os fatores
+            const selectedNumbers = [];
+            let evenCount = 0;
+            const targetEven = Math.round(NUMBERS_PER_SEQUENCE * analysisData.evenOddRatio.even / 
+                                       (analysisData.evenOddRatio.even + analysisData.evenOddRatio.odd));
+            
+            // Alvo para soma da sequência (dentro de 1 desvio padrão da média)
+            const sumStdDev = calculateStdDev(analysisData.sumAnalysis.sums);
+            const targetSumMin = analysisData.sumAnalysis.average - sumStdDev;
+            const targetSumMax = analysisData.sumAnalysis.average + sumStdDev;
+            
+            while (selectedNumbers.length < NUMBERS_PER_SEQUENCE) {
+                // Seleção ponderada
+                const totalWeight = weights.reduce((a, b) => a + b, 0);
+                let random = Math.random() * totalWeight;
+                let selectedIndex = -1;
+                
+                for (let i = 0; i < candidates.length; i++) {
+                    random -= weights[i];
+                    if (random <= 0) {
+                        selectedIndex = i;
+                        break;
+                    }
+                }
+                
+                if (selectedIndex === -1) selectedIndex = 0;
+                
+                const num = candidates[selectedIndex];
+                const isEven = num % 2 === 0;
+                
+                // Verifica critérios
+                if ((isEven && evenCount < targetEven) || (!isEven && (selectedNumbers.length - evenCount) < (NUMBERS_PER_SEQUENCE - targetEven))) {
+                    if (!selectedNumbers.includes(num)) {
+                        // Verifica se a soma potencial está dentro do intervalo desejado
+                        const potentialSum = [...selectedNumbers, num].reduce((a, b) => a + b, 0);
+                        const remainingNumbers = NUMBERS_PER_SEQUENCE - selectedNumbers.length - 1;
+                        
+                        if (potentialSum + MIN_NUMBER * remainingNumbers <= targetSumMax && 
+                            potentialSum + MAX_NUMBER * remainingNumbers >= targetSumMin) {
+                            
+                            selectedNumbers.push(num);
+                            if (isEven) evenCount++;
+                            
+                            // Remove o número selecionado para não repetir
+                            candidates.splice(selectedIndex, 1);
+                            weights.splice(selectedIndex, 1);
+                        }
+                    }
+                }
+            }
+            
+            // Ordena e retorna
+            return selectedNumbers.sort((a, b) => a - b);
+        }
+        
+        // Funções de exibição
+        function displayAnalysis() {
+            const container = document.getElementById('analysisResult');
+            let html = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${sequences.length}</div>
+                        <div class="stat-label">Sequências Analisadas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${Object.keys(analysisData.numberFrequency).length}</div>
+                        <div class="stat-label">Números Únicos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${analysisData.averageDistance.toFixed(1)}</div>
+                        <div class="stat-label">Distância Média</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${analysisData.sumAnalysis.average.toFixed(1)}</div>
+                        <div class="stat-label">Soma Média</div>
+                    </div>
+                </div>
+                
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h4 class="analysis-card-title"><i class="fas fa-star"></i> Números Mais Frequentes</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+            `;
+            
+            // Top 10 números mais frequentes
+            Object.entries(analysisData.frequentNumbers)
+                .slice(0, 10)
+                .forEach(([num, freq]) => {
+                    const percentage = ((freq / sequences.length) * 100).toFixed(1);
+                    html += `
+                        <div class="number" style="position: relative;" title="Número ${num} apareceu em ${freq} sequências (${percentage}%)">
+                            ${num}
+                            <div style="position: absolute; bottom: -15px; left: 0; right: 0; font-size: 0.7rem; text-align: center;">${percentage}%</div>
+                        </div>
+                    `;
+                });
+            
+            html += `
+                        </div>
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <h4 class="analysis-card-title"><i class="fas fa-chart-pie"></i> Distribuição por Faixa</h4>
+            `;
+            
+            // Distribuição por faixa
+            Object.entries(analysisData.rangeDistribution).forEach(([range, count]) => {
+                const percentage = ((count / (sequences.length * NUMBERS_PER_SEQUENCE)) * 100).toFixed(1);
+                html += `
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>${range}:</span>
+                            <span>${percentage}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Proporção par/ímpar
+            const total = analysisData.evenOddRatio.even + analysisData.evenOddRatio.odd;
+            const evenPercent = ((analysisData.evenOddRatio.even / total) * 100).toFixed(1);
+            const oddPercent = ((analysisData.evenOddRatio.odd / total) * 100).toFixed(1);
+            
+            html += `
+                    </div>
+                    
+                    <div class="analysis-card">
+                        <h4 class="analysis-card-title"><i class="fas fa-balance-scale-right"></i> Proporção Par/Ímpar</h4>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="text-align: center;">
+                                <div class="number" style="background-color: #4cc9f0; margin: 0 auto 0.5rem;">${evenPercent}%</div>
+                                <div>Pares</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div class="number" style="background-color: #f72585; margin: 0 auto 0.5rem;">${oddPercent}%</div>
+                                <div>Ímpares</div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="analysis-card-title"><i class="fas fa-sort-numeric-down"></i> Últimos Dígitos</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; justify-content: center;">
+            `;
+            
+            // Análise de últimos dígitos
+            analysisData.lastDigitAnalysis.forEach((count, digit) => {
+                const percentage = ((count / (sequences.length * NUMBERS_PER_SEQUENCE)) * 100).toFixed(1);
+                html += `
+                    <div style="text-align: center;">
+                        <div class="number" style="width: 2.2rem; height: 2.2rem; line-height: 2.2rem; background-color: #4895ef; margin: 0 auto 0.2rem;">
+                            ${digit}
+                        </div>
+                        <div style="font-size: 0.8rem;">${percentage}%</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        function displaySuggestedSequence(sequence) {
+            const container = document.getElementById('suggestedSequence');
+            let html = `
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; justify-content: center;">
+            `;
+            
+            sequence.forEach(num => {
+                const isFrequent = num in analysisData.frequentNumbers;
+                const freq = analysisData.numberFrequency[num] || 0;
+                const percentage = ((freq / sequences.length) * 100).toFixed(1);
+                
+                html += `
+                    <div class="number ${isFrequent ? 'highlight' : ''}" 
+                         title="Número ${num} - ${isFrequent ? 'Frequente' : 'Complementar'} (Apareceu ${freq} vezes, ${percentage}%)">
+                        ${num}
+                    </div>
+                `;
+            });
+            
+            const sum = sequence.reduce((a, b) => a + b, 0);
+            const sumPercentage = ((sum - analysisData.sumAnalysis.min) / 
+                                 (analysisData.sumAnalysis.max - analysisData.sumAnalysis.min) * 100).toFixed(1);
+            
+            html += `
+                </div>
+                
+                <div class="analysis-card" style="margin-top: 1rem;">
+                    <h4 class="analysis-card-title"><i class="fas fa-info-circle"></i> Detalhes da Sugestão</h4>
+                    <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
+                        <div>
+                            <div style="font-size: 0.9rem; color: var(--gray);">Soma da sequência</div>
+                            <div style="font-size: 1.3rem; font-weight: 600;">${sum}</div>
+                            <div class="progress-bar" style="margin-top: 0.5rem;">
+                                <div class="progress-fill" style="width: ${sumPercentage}%; background-color: ${sum >= analysisData.sumAnalysis.average ? '#4cc9f0' : '#f72585'};"></div>
+                            </div>
+                            <div style="font-size: 0.8rem; margin-top: 0.2rem;">
+                                Média histórica: ${analysisData.sumAnalysis.average.toFixed(1)}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div style="font-size: 0.9rem; color: var(--gray);">Distribuição por faixa</div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; justify-content: space-around;">
+            `;
+            
+            // Distribuição por faixa na sequência sugerida
+            const suggestedRanges = {
+                '1-12': sequence.filter(n => n <= 12).length,
+                '13-24': sequence.filter(n => n > 12 && n <= 24).length,
+                '25-36': sequence.filter(n => n > 24 && n <= 36).length,
+                '37-49': sequence.filter(n => n > 36 && n <= 49).length,
+                '50-60': sequence.filter(n => n > 49).length
+            };
+            
+            Object.entries(suggestedRanges).forEach(([range, count]) => {
+                html += `
+                    <div style="text-align: center;">
+                        <div style="font-size: 0.8rem;">${range}</div>
+                        <div style="font-weight: 600;">${count}</div>
+                    </div>
+                `;
+            });
+            
+            // Proporção par/ímpar na sequência sugerida
+            const evenCount = sequence.filter(n => n % 2 === 0).length;
+            const oddCount = NUMBERS_PER_SEQUENCE - evenCount;
+            
+            html += `
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div style="font-size: 0.9rem; color: var(--gray);">Par/Ímpar</div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; justify-content: center;">
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.1rem; font-weight: 600;">${evenCount}</div>
+                                    <div style="font-size: 0.8rem;">Pares</div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <div style="font-size: 1.1rem; font-weight: 600;">${oddCount}</div>
+                                    <div style="font-size: 0.8rem;">Ímpares</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="legend" style="margin-top: 1.2rem;">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #f72585;"></div>
+                        <span>Números frequentes (apareceram em várias sequências)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background-color: #4361ee;"></div>
+                        <span>Números complementares (balanceamento estatístico)</span>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        // Funções auxiliares
+        function parseSequence(input) {
+            return input.split(',')
+                .map(n => parseInt(n.trim()))
+                .filter(n => !isNaN(n) && n >= MIN_NUMBER && n <= MAX_NUMBER)
+                .slice(0, NUMBERS_PER_SEQUENCE);
+        }
+        
+        function calculateStdDev(numbers) {
+            const avg = numbers.reduce((a, b) => a + b, 0) / numbers.length;
+            const squareDiffs = numbers.map(n => Math.pow(n - avg, 2));
+            const avgSquareDiff = squareDiffs.reduce((a, b) => a + b, 0) / squareDiffs.length;
+            return Math.sqrt(avgSquareDiff);
+        }
+        
+        function updateSequenceList() {
+            const container = document.getElementById('sequenceList');
+            container.innerHTML = '';
+            
+            sequences.forEach((seq, index) => {
+                const seqElement = document.createElement('div');
+                seqElement.className = 'sequence-item';
+                seqElement.innerHTML = `
+                    <div class="sequence-item-title">Sequência ${index + 1}</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.3rem;">
+                        ${seq.map(n => `<div class="number" style="width: 1.8rem; height: 1.8rem; line-height: 1.8rem; font-size: 0.8rem;">${n}</div>`).join('')}
+                    </div>
+                    <button class="sequence-item-delete" onclick="removeSequence(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                container.appendChild(seqElement);
+            });
+        }
+        
+        function removeSequence(index) {
+            sequences.splice(index, 1);
+            updateSequenceList();
+            saveToLocalStorage();
+            
+            document.getElementById('analyzeBtn').disabled = sequences.length < 2;
+            document.getElementById('generateBtn').disabled = sequences.length < 2;
+            
+            if (sequences.length < 2) {
+                document.getElementById('result').style.display = 'none';
+            }
+        }
+        
+        // Funções de persistência
+        function saveToLocalStorage() {
+            const data = {
+                sequences: sequences,
+                analysis: analysisData,
+                timestamp: new Date().toISOString(),
+                version: '1.2',
+                config: {
+                    maxSequences: MAX_SEQUENCES,
+                    minNumber: MIN_NUMBER,
+                    maxNumber: MAX_NUMBER,
+                    numbersPerSequence: NUMBERS_PER_SEQUENCE
+                }
+            };
+            localStorage.setItem('numberPatternAnalyzerPremium100_6numbers', JSON.stringify(data));
+        }
+        
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('numberPatternAnalyzerPremium100_6numbers');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    sequences = data.sequences || [];
+                    analysisData = data.analysis || {};
+                    
+                    updateSequenceList();
+                    document.getElementById('analyzeBtn').disabled = sequences.length < 2;
+                    
+                    if (Object.keys(analysisData).length > 0) {
+                        document.getElementById('generateBtn').disabled = false;
+                        document.getElementById('result').style.display = 'block';
+                        displayAnalysis();
+                    }
+                } catch (e) {
+                    console.error("Erro ao carregar dados:", e);
+                }
+            }
+        }
+        
+        function exportData() {
+            const data = {
+                sequences: sequences,
+                analysis: analysisData,
+                timestamp: new Date().toISOString(),
+                version: '1.2',
+                config: {
+                    maxSequences: MAX_SEQUENCES,
+                    minNumber: MIN_NUMBER,
+                    maxNumber: MAX_NUMBER,
+                    numbersPerSequence: NUMBERS_PER_SEQUENCE
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `sequencias_6numeros_${new Date().getTime()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showAlert('Dados exportados com sucesso!', 'success');
+        }
+        
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (data.version !== '1.2') {
+                        showAlert('Este arquivo parece ser de uma versão incompatível', 'warning');
+                        return;
+                    }
+                    
+                    sequences = data.sequences || [];
+                    analysisData = data.analysis || {};
+                    
+                    updateSequenceList();
+                    saveToLocalStorage();
+                    
+                    document.getElementById('analyzeBtn').disabled = sequences.length < 2;
+                    
+                    if (Object.keys(analysisData).length > 0) {
+                        document.getElementById('generateBtn').disabled = false;
+                        document.getElementById('result').style.display = 'block';
+                        displayAnalysis();
+                    }
+                    
+                    showAlert(`Dados importados com sucesso! ${sequences.length} sequências carregadas.`, 'success');
+                } catch (error) {
+                    showAlert(`Erro ao importar arquivo: ${error.message}`, 'danger');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = ''; // Permite reimportar o mesmo arquivo
+        }
+        
+        function clearAll() {
+            if (confirm("Tem certeza que deseja reiniciar completamente?\nIsso apagará todas as sequências e análises.")) {
+                sequences = [];
+                analysisData = {};
+                resetInputs();
+                updateSequenceList();
+                document.getElementById('result').style.display = 'none';
+                document.getElementById('analyzeBtn').disabled = true;
+                document.getElementById('generateBtn').disabled = true;
+                localStorage.removeItem('numberPatternAnalyzerPremium100_6numbers');
+                
+                showAlert('Todos os dados foram reiniciados', 'info');
+            }
+        }
+        
+        function showAlert(message, type) {
+            const alert = document.createElement('div');
+            alert.className = 'alert';
+            alert.style.position = 'fixed';
+            alert.style.top = '20px';
+            alert.style.right = '20px';
+            alert.style.padding = '0.8rem 1rem';
+            alert.style.borderRadius = '8px';
+            alert.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.15)';
+            alert.style.color = 'white';
+            alert.style.zIndex = '1000';
+            alert.style.display = 'flex';
+            alert.style.alignItems = 'center';
+            alert.style.gap = '0.5rem';
+            alert.style.animation = 'fadeIn 0.3s ease-out';
+            alert.style.maxWidth = 'calc(100% - 40px)';
+            
+            switch (type) {
+                case 'success':
+                    alert.style.backgroundColor = '#4cc9f0';
+                    alert.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+                    break;
+                case 'warning':
+                    alert.style.backgroundColor = '#f77f00';
+                    alert.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+                    break;
+                case 'danger':
+                    alert.style.backgroundColor = '#f72585';
+                    alert.innerHTML = `<i class="fas fa-times-circle"></i> ${message}`;
+                    break;
+                case 'info':
+                    alert.style.backgroundColor = '#4895ef';
+                    alert.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+                    break;
+                default:
+                    alert.style.backgroundColor = '#4361ee';
+                    alert.innerHTML = `<i class="fas fa-bell"></i> ${message}`;
+            }
+            
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => document.body.removeChild(alert), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
